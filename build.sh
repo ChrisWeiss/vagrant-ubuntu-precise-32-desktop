@@ -3,7 +3,7 @@
 # make sure we have dependencies 
 hash mkisofs 2>/dev/null || { echo >&2 "ERROR: mkisofs not found.  Aborting."; exit 1; }
 
-BOX="ubuntu-precise-64"
+BOX="ubuntu-precise-32-desktop"
 
 # location, location, location
 FOLDER_BASE=`pwd`
@@ -27,15 +27,15 @@ chmod -R u+w "${FOLDER_ISO_INITRD}"
 rm -rf "${FOLDER_ISO_INITRD}"
 mkdir -p "${FOLDER_ISO_INITRD}"
 
-ISO_URL="http://releases.ubuntu.com/precise/ubuntu-12.04-alternate-amd64.iso"
+ISO_URL="http://releases.ubuntu.com/precise/ubuntu-12.04-desktop-i386.iso"
 ISO_FILENAME="${FOLDER_ISO}/`basename ${ISO_URL}`"
-ISO_MD5="9fcc322536575dda5879c279f0b142d7"
+ISO_MD5="d791352694374f1c478779f7f4447a3f"
 INITRD_FILENAME="${FOLDER_ISO}/initrd.gz"
 
 ISO_GUESTADDITIONS="/Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditions.iso"
 
 # download the installation disk if you haven't already or it is corrupted somehow
-echo "Downloading ubuntu-12.04-alternate-amd64.iso ..."
+echo "Downloading ubuntu-12.04-desktop-i386.iso ..."
 if [ ! -e "${ISO_FILENAME}" ] 
 then
    curl --output "${ISO_FILENAME}" -L "${ISO_URL}"
@@ -101,7 +101,7 @@ echo "Creating VM Box..."
 if ! VBoxManage showvminfo "${BOX}" >/dev/null 2>/dev/null; then
   VBoxManage createvm \
     --name "${BOX}" \
-    --ostype Ubuntu_64 \
+    --ostype Ubuntu_32 \
     --register \
     --basefolder "${FOLDER_VBOX}"
 
